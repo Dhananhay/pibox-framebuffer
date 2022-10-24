@@ -408,10 +408,8 @@ func (b *PiboxFrameBuffer) Stats() {
 	}
 	dc.SetColor(colorCpu)
 	b.TextOnContext(dc, 50, 66, 30, fmt.Sprintf("%v%%", math.Round(cpuPercent)), true, gg.AlignCenter)
-
-	temp_cmd = `vcgencmd measure_temp | grep -E -o '[0-9]{2,2}'`
-	cmd := exec.Command("bash", "-c", temp_cmd)
-    	temp_val := cmd.Run()
+	
+	temp_val, err := exec.Command("bash", "-c", "vcgencmd measure_temp | grep -E -o '[0-9]{2,2}'").Output()
 
 	dc.SetColor(color.RGBA{160, 160, 160, 255})
 	b.TextOnContext(dc, 120, 28, 22, "TMP", false, gg.AlignCenter)
