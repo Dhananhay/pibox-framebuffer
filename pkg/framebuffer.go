@@ -418,7 +418,11 @@ func (b *PiboxFrameBuffer) Stats() {
 
     get_temp_cmd.Start()
 
-    temp_val, _ := c2.Output()
+    temp_val, err := c2.Output()
+
+	if err != nil {
+		return fmt.Sprintf("Failed to execute command: %s", cmd)
+ 	}
 
 	dc.SetColor(color.RGBA{160, 160, 160, 255})
 	b.TextOnContext(dc, 120, 28, 22, "TMP", false, gg.AlignCenter)
