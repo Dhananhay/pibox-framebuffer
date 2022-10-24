@@ -411,7 +411,7 @@ func (b *PiboxFrameBuffer) Stats() {
 
 
 	cmd := exec.Command("vcgencmd measure_temp | grep -E -o '[0-9]{2,2}'")
-    temp_val := cmd.Run()
+    	temp_val := cmd.Run()
 
 	dc.SetColor(color.RGBA{160, 160, 160, 255})
 	b.TextOnContext(dc, 120, 28, 22, "TMP", false, gg.AlignCenter)
