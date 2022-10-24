@@ -27,6 +27,7 @@ import (
 	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/mem"
 	"github.com/skip2/go-qrcode"
+	"os/exec"
 )
 
 const DefaultScreenSize = 240
@@ -396,7 +397,7 @@ func (b *PiboxFrameBuffer) Stats() {
 	v, _ := mem.VirtualMemory()
 
 	dc.SetColor(color.RGBA{160, 160, 160, 255})
-	b.TextOnContext(dc, 70, 28, 22, "CPU", false, gg.AlignCenter)
+	b.TextOnContext(dc, 50, 28, 22, "CPU", false, gg.AlignCenter)
 	cpuPercent := cpuUsage[0]
 	colorCpu := color.RGBA{183, 225, 205, 255}
 	if cpuPercent > 40 {
@@ -406,9 +407,14 @@ func (b *PiboxFrameBuffer) Stats() {
 		colorCpu = color.RGBA{244, 199, 195, 255}
 	}
 	dc.SetColor(colorCpu)
-	b.TextOnContext(dc, 70, 66, 30, fmt.Sprintf("%v%%", math.Round(cpuPercent)), true, gg.AlignCenter)
+	b.TextOnContext(dc, 50, 66, 30, fmt.Sprintf("%v%%", math.Round(cpuPercent)), true, gg.AlignCenter)
+
+
+	cmd := exec.Command("vcgencmd measure_temp | grep -E -o '[0-9]{2,2}'")
+    temp_val := cmd.Run()
+
 	dc.SetColor(color.RGBA{160, 160, 160, 255})
-	b.TextOnContext(dc, 170, 28, 22, "MEM", false, gg.AlignCenter)
+	b.TextOnContext(dc, 120, 28, 22, "TMP", false, gg.AlignCenter)
 	colorMem := color.RGBA{183, 225, 205, 255}
 	if cpuPercent > 40 {
 		colorMem = color.RGBA{252, 232, 178, 255}
@@ -417,7 +423,22 @@ func (b *PiboxFrameBuffer) Stats() {
 		colorMem = color.RGBA{244, 199, 195, 255}
 	}
 	dc.SetColor(colorMem)
-	b.TextOnContext(dc, 170, 66, 30, fmt.Sprintf("%v%%", math.Round(v.UsedPercent)), true, gg.AlignCenter)
+	b.TextOnContext(dc, 120, 66, 30, fmt.Sprintf("%vC", math.Round(temp_val)), true, gg.AlignCenter)
+
+
+	dc.SetColor(color.RGBA{160, 160, 160, 255})
+	b.TextOnContext(dc, 190, 28, 22, "MEM", false, gg.AlignCenter)
+	colorMem := color.RGBA{183, 225, 205, 255}
+	if cpuPercent > 40 {
+		colorMem = color.RGBA{252, 232, 178, 255}
+	}
+	if cpuPercent > 70 {
+		colorMem = color.RGBA{244, 199, 195, 255}
+	}
+	dc.SetColor(colorMem)
+	b.TextOnContext(dc, 190, 66, 30, fmt.Sprintf("%v%%", math.Round(v.UsedPercent)), true, gg.AlignCenter)
+
+
 
 	interfaces, _ := net.Interfaces()
 	for _, inter := range interfaces {
