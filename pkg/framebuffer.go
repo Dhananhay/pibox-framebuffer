@@ -409,7 +409,7 @@ func (b *PiboxFrameBuffer) Stats() {
 	b.TextOnContext(dc, 50, 66, 30, fmt.Sprintf("%v%%", math.Round(cpuPercent)), true, gg.AlignCenter)
 
 	grep := exec.Command("grep", "-E", "-o", "[0-9]{2,2}")
-    get_temp := exec.Command("vcgencmd", "measure_temp")
+    get_temp := exec.Command("/usr/bin/vcgencmd", "measure_temp")
 
     // Get ps's stdout and attach it to grep's stdin.
     pipe, _ := get_temp.StdoutPipe()
