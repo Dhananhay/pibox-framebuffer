@@ -422,17 +422,17 @@ func (b *PiboxFrameBuffer) Stats() {
 	}
     fmt.Printf("Temp exec output: %s", temp_val)
 
-	dc.SetColor(color.RGBA{160, 160, 160, 255})
-	b.TextOnContext(dc, 120, 28, 22, "TMP", false, gg.AlignCenter)
-	colorMem := color.RGBA{183, 225, 205, 255}
-	if cpuPercent > 40 {
-		colorMem = color.RGBA{252, 232, 178, 255}
-	}
-	if cpuPercent > 70 {
-		colorMem = color.RGBA{244, 199, 195, 255}
-	}
-	dc.SetColor(colorMem)
-	b.TextOnContext(dc, 120, 66, 30, fmt.Sprintf("%v%%", math.Round(temp_val)), true, gg.AlignCenter)
+	// dc.SetColor(color.RGBA{160, 160, 160, 255})
+	// b.TextOnContext(dc, 120, 28, 22, "TMP", false, gg.AlignCenter)
+	// colorMem := color.RGBA{183, 225, 205, 255}
+	// if cpuPercent > 40 {
+	// 	colorMem = color.RGBA{252, 232, 178, 255}
+	// }
+	// if cpuPercent > 70 {
+	// 	colorMem = color.RGBA{244, 199, 195, 255}
+	// }
+	// dc.SetColor(colorMem)
+	// b.TextOnContext(dc, 120, 66, 30, fmt.Sprintf("%v%%", math.Round(temp_val)), true, gg.AlignCenter)
 
 
 	dc.SetColor(color.RGBA{160, 160, 160, 255})
