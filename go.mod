@@ -1,4 +1,4 @@
-module github.com/kubesail/pibox-framebuffer
+module github.com/dhananhay/pibox-framebuffer
 
 go 1.16
 

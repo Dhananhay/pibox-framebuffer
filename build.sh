@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TAG="kubesail/pibox-framebuffer:v$(cat VERSION.txt)"
+TAG="dhananhay/pibox-framebuffer:v$(cat VERSION.txt)"
 
 # Enable docker experimental mode:
 #  - echo '{ "experimental": true }' > /etc/docker/daemon.json

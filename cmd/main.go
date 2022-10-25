@@ -8,8 +8,8 @@ import (
 	"os"
 	"time"
 
-	pfb "github.com/kubesail/pibox-framebuffer/pkg"
-	_ "github.com/kubesail/pibox-framebuffer/statik"
+	pfb "github.com/dhananhay/pibox-framebuffer/pkg"
+	_ "github.com/dhananhay/pibox-framebuffer/statik"
 
 	"github.com/stianeikeland/go-rpio/v4"
 )
